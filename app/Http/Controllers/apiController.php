@@ -49,5 +49,31 @@ class apiController extends Controller
             "result" => $result
         ]);
     }
+    function numtoArray(Request $num)
+    {
+        $num = intval($num);
+        $new_array = array();
 
+        if ($num > 0)  $length = strlen($num);
+        else $length = strlen($num) - 1;
+
+        $i = 1;
+        $abs = abs($num);
+        while ($i <= $length) {
+            $value = 10 ** ($length - $i);
+            $new_number = floor($abs / $value);
+            $new_number = $new_number * $value;
+
+            if ($num > 0) array_push($new_array, $new_number);
+            else array_push($new_array, -$new_number);
+
+            $abs = $abs - $new_number;
+            $i++;
+        };
+
+        return response()->json([
+            "status" => "Success",
+            "message" => $new_array
+        ]);
+    }
 }
