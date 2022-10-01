@@ -25,5 +25,29 @@ class apiController extends Controller
                 array_push($numbers, $str[$i]);
         }
 
+        sort($numbers);
+        $tempArray = array();
+
+        for ($j = 0; $j < count($str_lower); $j++) {
+            $tempArray[$str_lower[$j]] = ord($str_lower[$j]) - 33;
+        }
+        for ($k = 0; $k < count($str_upper); $k++) {
+            $tempArray[$str_upper[$k]] = ord($str_upper[$k]);
+        }
+        asort($tempArray);
+
+        $result = '';
+        foreach ($tempArray as $index => $value) {
+            $result = $result . $index;
+        }
+        $result = $result . implode($numbers);
+
+        echo  $result;
+
+        return response()->json([
+            "response" => "success",
+            "result" => $result
+        ]);
+    }
 
 }
