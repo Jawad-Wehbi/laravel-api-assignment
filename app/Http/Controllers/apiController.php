@@ -76,4 +76,5 @@ class apiController extends Controller
             "message" => $new_array
         ]);
     }
+    
 }
